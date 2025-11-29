@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('packages', function (Blueprint $table) {
-           $table->id();
-            $table->string('name');
+        Schema::create('menus', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');                 // "Nasi Kebuli", "Ayam Goreng"
             $table->text('description')->nullable();
             $table->integer('price');
-            $table->string('image')->nullable(); 
+            $table->string('category')->default('food'); // 'food', 'drink', 'dessert'
+            $table->string('image')->nullable();    // path: storage/app/public/menus/
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('menus');
     }
 };
