@@ -9,4 +9,13 @@ class Menu extends Model
 {
     /** @use HasFactory<\Database\Factories\MenuFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        "name",
+        "description",
+        "category",
+        "price",
+        "image",
+        "is_active",
+    ];
 }
