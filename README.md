@@ -2,7 +2,6 @@ Berikut adalah **`README.md` profesional** untuk aplikasi **Wedding Organizer De
 
 ---
 
-```markdown
 # 🎉 Wedding Organizer Desktop App  
 *Aplikasi Manajemen Wedding Organizer Berbasis Desktop dengan Laravel, Filament, dan NativePHP*
 
@@ -58,8 +57,6 @@ Dibangun dengan teknologi modern namun tetap offline-friendly — cocok untuk sk
 - Kolom **H-** dengan warna dinamis (H-1 = merah, H-7 = oranye)  
 - Filter *"Butuh Pelunasan (H≤7)"*  
 - Dashboard ringkasan pesanan & reminder
-
----
 
 ## 🛠️ Teknologi
 
