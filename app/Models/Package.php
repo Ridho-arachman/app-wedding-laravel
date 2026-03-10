@@ -47,4 +47,9 @@ class Package extends Model
     {
         return $this->hasMany(Order::class, "package_code", "code");
     }
+
+    public function packageItems()
+    {
+        return $this->hasMany(PackageItem::class, "package_code", "code");
+    }
 }

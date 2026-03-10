@@ -19,7 +19,7 @@ class ItemResource extends Resource
     protected static ?string $navigationLabel = "Barang";
     protected static ?string $pluralLabel = "List Barang";
     protected static ?string $model = Item::class;
-    protected static string|\UnitEnum|null $navigationGroup = "Inventory";
+    protected static string|\UnitEnum|null $navigationGroup = "Manajemen Data";
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
 
     public static function form(Schema $schema): Schema
