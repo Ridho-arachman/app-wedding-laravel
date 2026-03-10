@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model
+class Package extends Model
 {
     use HasFactory;
 
@@ -16,10 +16,7 @@ class Item extends Model
         "code",
         "name",
         "description",
-        "category",
-        "unit",
-        "stock",
-        "min_stock",
+        "price",
         "image",
         "is_active",
     ];
@@ -29,25 +26,25 @@ class Item extends Model
     ];
 
     /**
-     * Relasi many-to-many dengan Package melalui package_items
+     * Relasi many-to-many dengan Item melalui package_items
      */
-    public function packages()
+    public function items()
     {
         return $this->belongsToMany(
-            Package::class,
+            Item::class,
             "package_items",
-            "item_code",
             "package_code",
+            "item_code",
         )
             ->withPivot("quantity", "unit", "sort_order")
             ->withTimestamps();
     }
 
     /**
-     * Relasi ke OrderItem
+     * Relasi ke Order
      */
-    public function orderItems()
+    public function orders()
     {
-        return $this->hasMany(OrderItem::class, "item_code", "code");
+        return $this->hasMany(Order::class, "package_code", "code");
     }
 }
