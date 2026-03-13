@@ -21,6 +21,8 @@ class Order extends Model
         "package_code",
         "total_price",
         "dp_amount",
+        "additional_charge",
+        "charge_description",
         "status",
         "notes",
         "created_by",

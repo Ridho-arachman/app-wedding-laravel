@@ -86,8 +86,6 @@ class DatabaseSeeder extends Seeder
                 $order->status = "dp_paid";
             } elseif ($totalPaid > 0) {
                 $order->status = "installment";
-            } else {
-                $order->status = "draft";
             }
             $order->saveQuietly();
         }

@@ -19,17 +19,17 @@ return new class extends Migration {
             $table->string("package_code")->nullable(); // foreign key ke packages
             $table->integer("total_price");
             $table->integer("dp_amount");
+            $table->integer("additional_charge")->default(0);
+            $table->string("charge_description")->nullable();
             $table
                 ->enum("status", [
-                    "draft",
-                    "dp_pending",
                     "dp_paid",
                     "installment",
                     "paid",
                     "completed",
                     "cancelled",
                 ])
-                ->default("draft");
+                ->default("dp_paid");
             $table->text("notes")->nullable();
             $table->foreignId("created_by")->constrained("users");
             $table->timestamps();
@@ -40,6 +40,10 @@ return new class extends Migration {
                 ->references("code")
                 ->on("packages")
                 ->nullOnDelete();
+
+            $table->index("order_number");
+            $table->index("event_date");
+            $table->index("status");
         });
     }
 

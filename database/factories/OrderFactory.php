@@ -1,22 +1,33 @@
 <?php
-// database/factories/OrderFactory.php
 
 namespace Database\Factories;
 
 use App\Models\Order;
+use App\Models\User;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
 {
     protected $model = Order::class;
 
-    public function definition()
+    public function definition(): array
     {
         static $orderNumberSequence = 1;
         $year = date("Y");
-        $prefix = "WO-" . $year . "-";
         $orderNumber =
-            $prefix . str_pad($orderNumberSequence++, 4, "0", STR_PAD_LEFT);
+            "WO-" .
+            $year .
+            "-" .
+            str_pad($orderNumberSequence++, 4, "0", STR_PAD_LEFT);
+
+        // Ambil package secara acak (atau buat baru)
+        $package =
+            Package::inRandomOrder()->first() ?? Package::factory()->create();
+        $totalPrice =
+            $package->price +
+            $this->faker->optional(0.3)->numberBetween(100_000, 1_000_000) ?:
+            0;
 
         return [
             "order_number" => $orderNumber,
@@ -27,18 +38,20 @@ class OrderFactory extends Factory
                 "+1 month",
                 "+6 months",
             ),
-            "package_code" => null, // akan diisi di seeder
-            "total_price" => $this->faker->numberBetween(5_000_000, 20_000_000),
-            "dp_amount" => fn($attrs) => $attrs["total_price"] * 0.5,
+            "package_code" => $package->code,
+            "total_price" => $totalPrice,
+            "dp_amount" => (int) ($totalPrice * 0.5), // 50% dari total
+            "additional_charge" => $totalPrice - $package->price,
+            "charge_description" => $this->faker->optional(0.3)->sentence(),
             "status" => $this->faker->randomElement([
-                "draft",
-                "dp_pending",
                 "dp_paid",
+                "installment",
                 "paid",
                 "completed",
+                "cancelled",
             ]),
-            "notes" => $this->faker->optional()->sentence(),
-            "created_by" => 1, // sementara, akan di-overwrite seeder
+            "notes" => $this->faker->optional()->paragraph(),
+            "created_by" => User::factory(), // atau ambil user existing
         ];
     }
 }
