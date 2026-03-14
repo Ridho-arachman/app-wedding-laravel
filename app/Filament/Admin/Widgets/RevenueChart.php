@@ -9,7 +9,7 @@ use Flowframe\Trend\TrendValue;
 
 class RevenueChartWidget extends ChartWidget
 {
-    protected static ?string $heading = "Pendapatan Bulanan";
+    protected ?string $heading = "Pendapatan Bulanan";
 
     protected function getData(): array
     {
