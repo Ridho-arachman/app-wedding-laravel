@@ -19,7 +19,9 @@ use Filament\Tables\Table;
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
-
+    protected static ?string $navigationLabel = "Pesanan";
+    protected static ?string $pluralLabel = "List Pesanan";
+    protected static string|\UnitEnum|null $navigationGroup = "Transaksi";
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
 
     public static function form(Schema $schema): Schema

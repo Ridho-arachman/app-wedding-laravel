@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string("order_number");
             $table->enum("type", ["dp", "installment", "final"]);
             $table->integer("amount");
-            $table->date("payment_date");
+            $table->date("payment_date")->nullable(); // tambahkan nullable()
             $table->enum("method", ["cash", "transfer", "midtrans"]);
             $table->string("proof")->nullable();
             $table->string("midtrans_order_id")->nullable();
